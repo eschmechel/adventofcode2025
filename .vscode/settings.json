@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "array": "cpp",
+        "string_view": "cpp",
+        "span": "cpp",
+        "deque": "cpp",
+        "map": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "ostream": "cpp"
+    }
+}

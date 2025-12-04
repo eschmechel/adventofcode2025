@@ -20,7 +20,7 @@ private:
     Node* head;
     
 public:
-    Node* getHead() const { return head; }
+    Node* getHead()  { return head; }
     
     DoublyLinkedList() : head(nullptr) {
         Node* firstNode = nullptr;
@@ -60,16 +60,6 @@ public:
         delete head;
     }
 
-    void rotateLeft(int rotations){
-        for (int i = 0; i < rotations; i++){
-            head = head->prev;
-        }
-    }
-    void rotateRight(int rotations){
-        for (int i = 0; i < rotations; i++){
-            head= head->next;
-        }
-    }
 };
 
 int main(){
@@ -78,17 +68,25 @@ int main(){
     std::string currentLine;
     DoublyLinkedList LL;
     int count = 0;
+    Node* currentNum = LL.getHead();
     while(std::getline(inputFile, currentLine)){
         bool dialDirection = currentLine.at(0) == 'L' ? 0 : 1;//False left, True right
         int rotations = std::stoi(currentLine.substr(1));
-        rotations %=  100;
-        dialDirection ? LL.rotateRight(rotations) : LL.rotateLeft(rotations);
-        Node* currentNum = LL.getHead();
 
-        if (currentNum->data == 0){
-            count++;
+        count += rotations /100;
+        rotations %= 100;
+
+        if  (dialDirection){//Rotate Right
+            for (int i = 0; i < rotations; i++){
+                currentNum = currentNum->next;
+                if (currentNum->data == 0) count ++;
+            }
+        }else{
+            for (int i = 0; i < rotations; i++){
+                currentNum = currentNum->prev;
+                if (currentNum->data == 0) count++;
+            }
         }
-
         std::cout << "Rotating: " << currentLine << std::endl;
         std::cout << "CurrentNum = " << currentNum->data<< std::endl;
     }
